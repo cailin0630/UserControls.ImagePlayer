@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="ICare.UserControls.ImagePlayer.UcImagePlayerExt"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:icareControls="clr-namespace:ICare.Controls;assembly=ICare.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ICare.UserControls.ImagePlayer;component/UcImagePlayerStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Name="CurrentImage"
+               Grid.Row="0"></Image>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Slider Name="FrameSlider"
+                    Grid.Column="0"
+                    ValueChanged="FrameSlider_OnValueChanged"
+                    Minimum="1"
+                    IsMoveToPointEnabled="True"
+                    VerticalAlignment="Center"
+                    TickPlacement="BottomRight"
+                    Margin="5"
+                    Style="{DynamicResource SliderRoundThumbStyle}"
+            ></Slider>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="1"
+                        Margin="5">
+                <icareControls:ThreeStateBasedButton
+                    Name="ButtonPrev"
+                    BaseImage="{StaticResource ImageSourcePreviousOutline}"
+                    ImageOver="{StaticResource ImageSourcePreviousOverOutline}"
+                    ImageDown="{StaticResource ImageSourcePreviousDownOutline}"
+                    Click="ButtonPrev_OnClick"
+                    Margin="5"
+                    Height="15"
+                    Width="15"
+                    ToolTip="上一帧"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Style="{DynamicResource ThreeStateBaseButtonStyle}">
+                </icareControls:ThreeStateBasedButton>
+                <icareControls:ThreeStateBasedButton
+                    Name="ButtonPlay"
+                    BaseImage="{StaticResource ImageSourcePlayOutline}"
+                    ImageOver="{StaticResource ImageSourcePlayOverOutline}"
+                    ImageDown="{StaticResource ImageSourcePlayDownOutline}"
+                    Click="ButtonPlay_OnClick"
+                    ToolTip="播放"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Height="15"
+                    Width="15"
+                    Margin="5"
+                    Style="{DynamicResource ThreeStateBaseButtonStyle}"></icareControls:ThreeStateBasedButton>
+                <icareControls:ThreeStateBasedButton
+                    Name="ButtonStop"
+                    BaseImage="{StaticResource ImageSourcePauseOutline}"
+                    ImageOver="{StaticResource ImageSourcePauseOverOutline}"
+                    ImageDown="{StaticResource ImageSourcePauseDownOutline}"
+                    Click="ButtonStop_OnClick"
+                    Height="15"
+                    Width="15"
+                    Margin="5"
+                    ToolTip="暂停"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Style="{DynamicResource ThreeStateBaseButtonStyle}"
+                    Visibility="Collapsed">
+                </icareControls:ThreeStateBasedButton>
+                <icareControls:ThreeStateBasedButton 
+                    Name="ButtonNext"
+                    BaseImage="{StaticResource ImageSourceNextOutline}"
+                    ImageOver="{StaticResource ImageSourceNextOverOutline}"
+                    ImageDown="{StaticResource ImageSourceNextDownOutline}"
+                    Click="ButtonNext_OnClick"
+                    ToolTip="下一帧" Cursor="Hand" Focusable="False"
+                    Margin="5"
+                    Style="{DynamicResource ThreeStateBaseButtonStyle}"
+                    Height="15"
+                    Width="15">
+                </icareControls:ThreeStateBasedButton>
+            </StackPanel>
+ 
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="2"
+                        Margin="5">
+                <TextBlock Name="SpeedTextBlock"
+                           Text="1"
+                           Style="{DynamicResource SimpleTextBlock}"></TextBlock>
+                <Slider Name="SpeedSlider"
+                        ValueChanged="SpeedSlider_OnValueChanged"
+                        TickPlacement="BottomRight"
+                        IsMoveToPointEnabled="True"
+                        Margin="5"
+                        Width="50"
+                        Style="{DynamicResource SliderRoundThumbStyle}"
+                        Value="1"
+                 ></Slider>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="3"
+                        Orientation="Horizontal"
+                        Margin="5">
+                <TextBlock Text="第"
+                           Style="{DynamicResource SimpleTextBlock}"></TextBlock>
+                <TextBox
+                    Name="CurrentFrameTextBox"
+                    Background="Transparent"
+                    Foreground="#b2b2b2"
+                    TextAlignment="Center"
+                    FontSize="9"
+                    Width="30" 
+                    Height="17"
+                    Text="0"
+                    TextChanged="CurrentFrameTextBox_OnTextChanged"
+                    ></TextBox>
+                <TextBlock Text="帧/共"
+                           Style="{DynamicResource SimpleTextBlock}"></TextBlock>
+                <TextBlock Name="TotalFrameTextBlock" 
+                           Text="0"
+                           Style="{DynamicResource SimpleTextBlock}"></TextBlock>
+                <TextBlock Text="帧"
+                           Style="{DynamicResource SimpleTextBlock}"></TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
